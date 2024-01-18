@@ -14,7 +14,7 @@ public class GameOfLife {
 		////test1(fileName);
 		////test2(fileName);
 		////test3(fileName, 3);
-		////play(fileName);
+		play(fileName);
 	}
 	
 	// Reads the data file and prints the initial board.
@@ -106,14 +106,22 @@ public class GameOfLife {
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	// Uses the count(board,i,j) function to count the number of alive neighbors.
 	public static int cellValue(int[][] board, int i, int j) {
-		
+		int alive = 1;
+		int dead = 0;
 		int status = board[i][j];
-		if(status == 1){
-			if(count(board, i, j) == 0 || count(board, i, j) == 1 || count(board, i, j) > 3) return 0;
-		}
-		else if (status == 0) {
-			if (count(board, i, j) == 3) return 1;
-		}
+		if (status == 1) {
+			if (count(board, i, j) == 3 || count(board, i, j) == 2 ) {
+				return alive;
+			} else if((count(board, i, j) > 3) || (count(board, i, j) < 2)) {
+				return dead;
+		} 
+	}
+		if (status == 0) {
+			if(count(board, i, j) >= 3) {
+				return alive;
+			}
+		} 
+		
 		 return status;
 		}
 		
